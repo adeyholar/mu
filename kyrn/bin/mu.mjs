@@ -485,7 +485,7 @@ export function planLaunch({
 	} else {
 		const runtime = sourceRuntime({ root, platform, stripsTypes, exists: fs.exists });
 		if (runtime.error) return { error: runtime.error };
-		entry = [...runtime.args, path.join(root, "packages", "coding-agent", "src", "experimental", "cli.ts")];
+		entry = [...runtime.args, path.join(root, "packages", "coding-agent", "src", "cli.ts")];
 	}
 
 	const muDir = muHome({ home, platform, isDir: fs.isDir });

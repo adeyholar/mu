@@ -262,6 +262,33 @@ describe("ToolExecutionComponent parity", () => {
 		expect(completed).toContain(`Took ${formatted}`);
 	});
 
+	// #10549
+	test("bash renderer shows a result's recorded duration, also for a result restored without a live start", () => {
+		const render = (live: boolean): string => {
+			vi.useFakeTimers();
+			vi.setSystemTime(0);
+			const component = new ToolExecutionComponent(
+				"bash",
+				"tool-bash-recorded",
+				{ command: "sleep 4" },
+				{},
+				createBashToolDefinition(process.cwd(), { exposeSessionEnvironment: false }),
+				createFakeTui(),
+				process.cwd(),
+			);
+			if (live) {
+				component.markExecutionStarted();
+				component.updateResult({ content: [], isError: false }, true);
+				// The wall clock jumps; the recorded duration does not.
+				vi.advanceTimersByTime(3_600_000);
+			}
+			component.updateResult({ content: [], isError: false, durationMs: 4_200 }, false);
+			return stripAnsi(component.render(120).join("\n"));
+		};
+		expect(render(true)).toContain("Took 4.2s");
+		expect(render(false)).toContain("Took 4.2s");
+	});
+
 	test("does not duplicate built-in headers when passed the active built-in definition", () => {
 		const component = new ToolExecutionComponent(
 			"read",
@@ -661,7 +688,9 @@ describe("ToolExecutionComponent parity", () => {
 				false,
 			);
 
-			const collapsed = stripAnsi(component.render(120).join("\n"));
+			// Test collapsing independently of line wrapping in long checkout paths.
+			const width = Math.max(120, scenario.compact.length + 80);
+			const collapsed = stripAnsi(component.render(width).join("\n"));
 			expect(collapsed).toContain(scenario.compact);
 			expect(collapsed).not.toContain(scenario.hidden);
 			if (scenario.absent) {
@@ -669,7 +698,7 @@ describe("ToolExecutionComponent parity", () => {
 			}
 
 			component.setExpanded(true);
-			const expanded = stripAnsi(component.render(120).join("\n"));
+			const expanded = stripAnsi(component.render(width).join("\n"));
 			expect(expanded).toContain(scenario.hidden);
 		});
 	}

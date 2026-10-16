@@ -214,6 +214,86 @@ describe("kyrn features", () => {
 		await vi.waitFor(() => expect(readFileSync(path, "utf8")).toContain("it hangs"));
 	});
 
+	it("internal turns preserve hidden skills and tools without repeating user-task decisions", async () => {
+		const directory = mkdtempSync(join(tmpdir(), "mu-custom-turn-"));
+		const path = join(directory, "lessons.jsonl");
+		writeFileSync(
+			path,
+			JSON.stringify({
+				id: "tests",
+				trigger: "running tests",
+				lesson: "Use vitest --run.",
+				created: "2026-10-16T00:00:00Z",
+			}),
+		);
+		try {
+			const provider = new MockJudgeProvider(() => ({ skill_0: no, capability_0: no, lesson_0: yes }));
+			const skillNames: string[][] = [];
+			const harness = await createHarness({
+				tools: [tool("debug_start", () => "started")],
+				extensionFactories: [
+					(pi) => {
+						pi.on("before_agent_start", (event) => {
+							event.systemPromptOptions.skills = [
+								{
+									name: "calendar",
+									description: "Manage calendar events",
+									filePath: join(directory, "SKILL.md"),
+									baseDir: directory,
+									sourceInfo: { path: directory, source: "test", scope: "temporary", origin: "top-level" },
+									disableModelInvocation: false,
+								},
+							];
+						});
+					},
+					createKyrnJudgeExtension({
+						provider,
+						mode: "active",
+						only: ["preflight", "skills", "catalog", "memory"],
+						config: parseConfig({
+							features: {
+								skills: { minSkills: 1 },
+								memory: { path, applied: false, outcome: false },
+							},
+						}),
+						capabilities: [
+							{
+								id: "pack:debugger",
+								kind: "pack",
+								title: "Debugger",
+								description: "Debug processes",
+								tools: ["debug_start"],
+								exposure: "judged",
+							},
+						],
+					}),
+					(pi) => {
+						pi.on("before_agent_start", (event) => {
+							skillNames.push((event.systemPromptOptions.skills ?? []).map((skill) => skill.name));
+						});
+					},
+				],
+			});
+			harnesses.push(harness);
+			harness.setResponses([fauxAssistantMessage("Tests passed."), fauxAssistantMessage("Checked.")]);
+			await harness.session.prompt("Run the tests.");
+			const count = provider.calls.length;
+			expect(provider.calls.some((call) => "skill_0" in call.questions)).toBe(true);
+			expect(provider.calls.some((call) => "capability_0" in call.questions)).toBe(true);
+			expect(customMessages(harness, "kyrn.lessons")).toHaveLength(1);
+			await harness.session.sendCustomMessage(
+				{ customType: "test.followup", content: "Verify the result.", display: false },
+				{ triggerTurn: true },
+			);
+			expect(provider.calls).toHaveLength(count);
+			expect(skillNames).toEqual([[], []]);
+			expect(harness.session.getActiveToolNames()).not.toContain("debug_start");
+			expect(customMessages(harness, "kyrn.lessons")).toHaveLength(1);
+		} finally {
+			rmSync(directory, { recursive: true, force: true });
+		}
+	});
+
 	it("swarm: routes each task to a role, a model and a thinking level", async () => {
 		const runs: { task: SwarmTask; assignment: SwarmAssignment }[] = [];
 		const runner = async (task: SwarmTask, assignment: SwarmAssignment) => {

@@ -58,6 +58,14 @@ export function registerSkills(runtime: KyrnRuntime): void {
 		failOpen(async (event, ctx) => {
 			runtime.touch(ctx);
 			const mode = runtime.mode(skillDisclosure.id);
+			if (event.messageType === "custom") {
+				if (mode !== "off") {
+					event.systemPromptOptions.skills = (event.systemPromptOptions.skills ?? []).filter(
+						(skill) => !hidden.has(skill.name),
+					);
+				}
+				return undefined;
+			}
 			const started = early?.turn === runtime.userTurns ? early : undefined;
 			early = undefined;
 			const all = event.systemPromptOptions.skills ?? [];

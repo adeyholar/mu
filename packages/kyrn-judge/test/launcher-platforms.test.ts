@@ -374,7 +374,7 @@ describe("starting pi", () => {
 			"file:///C:/Users/bai/code/KYRN/kyrn/bin/compile-cache.mjs",
 			"--import",
 			"file:///C:/Users/bai/code/KYRN/packages/coding-agent/src/experimental/source-resolver.ts",
-			`${WIN_ROOT}\\packages\\coding-agent\\src\\experimental\\cli.ts`,
+			`${WIN_ROOT}\\packages\\coding-agent\\src\\cli.ts`,
 			"-e",
 			`${WIN_ROOT}\\packages\\kyrn-judge\\src\\extension\\kyrn-judge.ts`,
 			"-p",
@@ -405,7 +405,7 @@ describe("starting pi", () => {
 	it("runs a checkout's TypeScript with Node itself, and says why where it cannot", () => {
 		expect(launch({ argv: ["--mode", "rpc"] }).args).toEqual([
 			...POSIX_NATIVE,
-			`${POSIX_ROOT}/packages/coding-agent/src/experimental/cli.ts`,
+			`${POSIX_ROOT}/packages/coding-agent/src/cli.ts`,
 			"-e",
 			`${POSIX_ROOT}/packages/kyrn-judge/src/extension/kyrn-judge.ts`,
 			"--mode",

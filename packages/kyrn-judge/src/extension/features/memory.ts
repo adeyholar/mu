@@ -283,6 +283,7 @@ export function registerMemory(runtime: KyrnRuntime, roots?: HarnessRoots): void
 			runtime.touch(ctx);
 			sync();
 			instructions = projectInstructions(event.systemPromptOptions.contextFiles);
+			if (event.messageType === "custom") return undefined;
 			const started = early?.turn === runtime.userTurns ? early : undefined;
 			early = undefined;
 			if (runtime.turn.preflight?.needsMemory === "no") return undefined;

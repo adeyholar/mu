@@ -74,6 +74,10 @@ export function registerCatalog(runtime: KyrnRuntime): void {
 				applyLoadout(true);
 				return undefined;
 			}
+			if (event.messageType === "custom") {
+				applyLoadout();
+				return undefined;
+			}
 			const started = early?.turn === runtime.userTurns ? early : undefined;
 			early = undefined;
 			const candidates = catalog.hidden();

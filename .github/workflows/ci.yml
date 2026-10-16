@@ -46,6 +46,9 @@ jobs:
       - name: Check (lint, format, types)
         run: npm run check
 
+      - name: Build the pi-env daemon
+        run: npm run build:daemon --workspace packages/env
+
       # Tests that need a real provider skip themselves without API keys. mu's own tests use a mock judge
       # and a fake model, and never call a real one.
       - name: Test

@@ -385,7 +385,7 @@ export async function main(argv = process.argv.slice(2)) {
 
 	// What pi's bundle leaves to node_modules (scripts/build-coding-agent-bundle.mjs); the optional native
 	// accelerators it can also use are left out, as their callers do without them.
-	const bundleDependencies = ["@earendil-works/chord", "@silvia-odwyer/photon-node", "jiti"];
+	const bundleDependencies = ["@silvia-odwyer/photon-node", "jiti"];
 	const dependencies = Object.fromEntries(bundleDependencies.map((name) => [name, exactVersion(pi.dependencies[name])]));
 	const template = readJson(join(here, "package.template.json"));
 	const manifest = { ...template, dependencies, muBuild: { pi: pi.version, judge: judgeVersion, commit: gitCommit() } };
