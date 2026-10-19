@@ -6217,18 +6217,18 @@
 			"fa-IR": "دستورها در محتوای بیرونی"
 		},
 		"decisions[id=tool.injection].summary": {
-			"en": "Before the model reads a web page, search results or an MCP server's answer: which passages carry instructions aimed at an AI (ignore rules, hand over data, run commands, or carry the conversation out through a link)? Those are withheld and replaced by a one-line note. When Jev gives no answer, only plain injection phrases are withheld.",
-			"zh-TW": "網頁、搜尋結果和 MCP 伺服器回傳的內容，在模型讀到之前先過一遍：哪一段是寫給 AI 的指令（叫它忽略規則、交出資料、執行指令，或藉一個連結把對話帶出去）。這樣的段落會被扣下，換成一行說明。Jev 沒答上來時，只扣下明顯的注入用語。",
-			"ja-JP": "モデルが Web ページ、検索結果、MCP サーバーの応答を読む前に確認します。どの段落が AI に向けた指示（ルールを無視させる、データを渡させる、コマンドを実行させる、リンク経由で会話を外部へ持ち出させる）を含むか。該当する段落は差し止め、1 行の説明に置き換えます。Jev が答えないときは、明らかなインジェクション表現だけを差し止めます。",
-			"ko-KR": "모델이 웹 페이지, 검색 결과, MCP 서버의 응답을 읽기 전에 먼저 살펴봅니다. 어떤 단락이 AI를 겨냥한 지시(규칙 무시, 데이터 넘기기, 명령 실행, 링크로 대화를 밖으로 빼내기)를 담고 있는지. 그런 단락은 보류하고 한 줄 안내로 바꿉니다. Jev가 답하지 못하면 명백한 주입 문구만 보류합니다.",
-			"de-DE": "Bevor das Modell eine Webseite, Suchergebnisse oder die Antwort eines MCP-Servers liest: Welche Abschnitte enthalten Anweisungen an eine KI (Regeln ignorieren, Daten herausgeben, Befehle ausführen oder das Gespräch über einen Link nach außen tragen)? Diese werden zurückgehalten und durch einen einzeiligen Hinweis ersetzt. Antwortet Jev nicht, werden nur eindeutige Injektionsformulierungen zurückgehalten.",
-			"fr-FR": "Avant que le modèle lise une page web, des résultats de recherche ou la réponse d'un serveur MCP : quels passages contiennent des instructions destinées à une IA (ignorer les règles, livrer des données, exécuter des commandes, ou faire sortir la conversation par un lien) ? Ces passages sont retenus et remplacés par une note d'une ligne. Si Jev ne répond pas, seules les formulations d'injection évidentes sont retenues.",
-			"es-ES": "Antes de que el modelo lea una página web, resultados de búsqueda o la respuesta de un servidor MCP: ¿qué pasajes llevan instrucciones dirigidas a una IA (ignorar reglas, entregar datos, ejecutar comandos o sacar la conversación a través de un enlace)? Esos pasajes se retienen y se sustituyen por una nota de una línea. Si Jev no responde, solo se retienen las frases de inyección evidentes.",
-			"pt-BR": "Antes de o modelo ler uma página web, resultados de busca ou a resposta de um servidor MCP: quais trechos trazem instruções dirigidas a uma IA (ignorar regras, entregar dados, executar comandos ou levar a conversa para fora por um link)? Esses trechos são retidos e substituídos por uma nota de uma linha. Se o Jev não responder, só as frases de injeção evidentes são retidas.",
-			"ru-RU": "Прежде чем модель прочтёт веб-страницу, результаты поиска или ответ MCP-сервера: какие фрагменты содержат инструкции, адресованные ИИ (игнорировать правила, выдать данные, выполнить команды или вынести разговор наружу через ссылку)? Такие фрагменты задерживаются и заменяются однострочной пометкой. Если Jev не ответил, задерживаются только явные фразы-инъекции.",
-			"uk-UA": "Перш ніж модель прочитає вебсторінку, результати пошуку чи відповідь MCP-сервера: які фрагменти містять інструкції, адресовані ШІ (ігнорувати правила, видати дані, виконати команди чи винести розмову назовні через посилання)? Такі фрагменти затримуються й замінюються однорядковою приміткою. Якщо Jev не відповів, затримуються лише явні фрази-ін'єкції.",
-			"tr-TR": "Model bir web sayfasını, arama sonuçlarını veya bir MCP sunucusunun yanıtını okumadan önce: hangi bölümler bir yapay zekâya yönelik talimat içeriyor (kuralları yok saymak, veri vermek, komut çalıştırmak veya konuşmayı bir bağlantıyla dışarı taşımak)? Bu bölümler alıkonur ve tek satırlık bir notla değiştirilir. Jev yanıt vermezse yalnızca açık enjeksiyon ifadeleri alıkonur.",
-			"fa-IR": "پیش از آنکه مدل یک صفحهٔ وب، نتایج جست‌وجو یا پاسخ یک سرور MCP را بخواند: کدام بخش‌ها دستورهایی خطاب به هوش مصنوعی دارند (نادیده گرفتن قوانین، تحویل داده، اجرای فرمان، یا بیرون بردن گفت‌وگو با یک پیوند)؟ این بخش‌ها نگه داشته می‌شوند و جایشان یک یادداشت یک‌خطی می‌آید. اگر Jev پاسخ ندهد، فقط عبارت‌های آشکار تزریق نگه داشته می‌شوند."
+			"en": "Before the model reads a web page, search results, an MCP server's answer or what a shell command fetched from another machine (curl, gh issue view): which passages carry instructions aimed at an AI (ignore rules, hand over data, run commands, or carry the conversation out through a link)? Those are withheld and replaced by a one-line note. When Jev gives no answer, only plain injection phrases are withheld. A sub-agent that had passages withheld from what it read hands back its report under a warning.",
+			"zh-TW": "網頁、搜尋結果、MCP 伺服器回傳的內容，以及 shell 指令從別的機器取回的內容（curl、gh issue view），在模型讀到之前先過一遍：哪一段是寫給 AI 的指令（叫它忽略規則、交出資料、執行指令，或藉一個連結把對話帶出去）。這樣的段落會被扣下，換成一行說明。Jev 沒答上來時，只扣下明顯的注入用語。子代理讀到的內容裡有段落被扣下時，它的報告交回時前面會附一句警告。",
+			"ja-JP": "モデルが Web ページ、検索結果、MCP サーバーの応答、またはシェルコマンドが別のマシンから取得した内容（curl、gh issue view）を読む前に確認します。どの段落が AI に向けた指示（ルールを無視させる、データを渡させる、コマンドを実行させる、リンク経由で会話を外部へ持ち出させる）を含むか。該当する段落は差し止め、1 行の説明に置き換えます。Jev が答えないときは、明らかなインジェクション表現だけを差し止めます。読んだ内容から段落が差し止められたサブエージェントの報告には、警告が付いて返されます。",
+			"ko-KR": "모델이 웹 페이지, 검색 결과, MCP 서버의 응답, 또는 셸 명령이 다른 컴퓨터에서 가져온 내용(curl, gh issue view)을 읽기 전에 먼저 살펴봅니다. 어떤 단락이 AI를 겨냥한 지시(규칙 무시, 데이터 넘기기, 명령 실행, 링크로 대화를 밖으로 빼내기)를 담고 있는지. 그런 단락은 보류하고 한 줄 안내로 바꿉니다. Jev가 답하지 못하면 명백한 주입 문구만 보류합니다. 읽은 내용에서 단락이 보류된 하위 에이전트의 보고서는 경고와 함께 돌아옵니다.",
+			"de-DE": "Bevor das Modell eine Webseite, Suchergebnisse, die Antwort eines MCP-Servers oder das liest, was ein Shell-Befehl von einem anderen Rechner geholt hat (curl, gh issue view): Welche Abschnitte enthalten Anweisungen an eine KI (Regeln ignorieren, Daten herausgeben, Befehle ausführen oder das Gespräch über einen Link nach außen tragen)? Diese werden zurückgehalten und durch einen einzeiligen Hinweis ersetzt. Antwortet Jev nicht, werden nur eindeutige Injektionsformulierungen zurückgehalten. Ein Sub-Agent, dem beim Lesen Abschnitte zurückgehalten wurden, gibt seinen Bericht mit einer Warnung zurück.",
+			"fr-FR": "Avant que le modèle lise une page web, des résultats de recherche, la réponse d'un serveur MCP ou ce qu'une commande shell a récupéré sur une autre machine (curl, gh issue view) : quels passages contiennent des instructions destinées à une IA (ignorer les règles, livrer des données, exécuter des commandes, ou faire sortir la conversation par un lien) ? Ces passages sont retenus et remplacés par une note d'une ligne. Si Jev ne répond pas, seules les formulations d'injection évidentes sont retenues. Un sous-agent dont des passages lus ont été retenus rend son rapport précédé d'un avertissement.",
+			"es-ES": "Antes de que el modelo lea una página web, resultados de búsqueda, la respuesta de un servidor MCP o lo que un comando de shell trajo de otra máquina (curl, gh issue view): ¿qué pasajes llevan instrucciones dirigidas a una IA (ignorar reglas, entregar datos, ejecutar comandos o sacar la conversación a través de un enlace)? Esos pasajes se retienen y se sustituyen por una nota de una línea. Si Jev no responde, solo se retienen las frases de inyección evidentes. Un subagente al que se le retuvieron pasajes de lo que leyó entrega su informe con una advertencia.",
+			"pt-BR": "Antes de o modelo ler uma página web, resultados de busca, a resposta de um servidor MCP ou o que um comando de shell trouxe de outra máquina (curl, gh issue view): quais trechos trazem instruções dirigidas a uma IA (ignorar regras, entregar dados, executar comandos ou levar a conversa para fora por um link)? Esses trechos são retidos e substituídos por uma nota de uma linha. Se o Jev não responder, só as frases de injeção evidentes são retidas. Um subagente que teve trechos retidos do que leu devolve o relatório com um aviso.",
+			"ru-RU": "Прежде чем модель прочтёт веб-страницу, результаты поиска, ответ MCP-сервера или то, что shell-команда получила с другой машины (curl, gh issue view): какие фрагменты содержат инструкции, адресованные ИИ (игнорировать правила, выдать данные, выполнить команды или вынести разговор наружу через ссылку)? Такие фрагменты задерживаются и заменяются однострочной пометкой. Если Jev не ответил, задерживаются только явные фразы-инъекции. Субагент, у которого из прочитанного были задержаны фрагменты, сдаёт отчёт с предупреждением.",
+			"uk-UA": "Перш ніж модель прочитає вебсторінку, результати пошуку, відповідь MCP-сервера чи те, що shell-команда отримала з іншої машини (curl, gh issue view): які фрагменти містять інструкції, адресовані ШІ (ігнорувати правила, видати дані, виконати команди чи винести розмову назовні через посилання)? Такі фрагменти затримуються й замінюються однорядковою приміткою. Якщо Jev не відповів, затримуються лише явні фрази-ін'єкції. Субагент, у якого з прочитаного були затримані фрагменти, здає звіт із попередженням.",
+			"tr-TR": "Model bir web sayfasını, arama sonuçlarını, bir MCP sunucusunun yanıtını veya bir kabuk komutunun başka bir makineden getirdiğini (curl, gh issue view) okumadan önce: hangi bölümler bir yapay zekâya yönelik talimat içeriyor (kuralları yok saymak, veri vermek, komut çalıştırmak veya konuşmayı bir bağlantıyla dışarı taşımak)? Bu bölümler alıkonur ve tek satırlık bir notla değiştirilir. Jev yanıt vermezse yalnızca açık enjeksiyon ifadeleri alıkonur. Okuduklarından bölümler alıkonan bir alt ajan, raporunu bir uyarıyla teslim eder.",
+			"fa-IR": "پیش از آنکه مدل یک صفحهٔ وب، نتایج جست‌وجو، پاسخ یک سرور MCP یا آنچه یک فرمان shell از ماشین دیگری آورده (curl، gh issue view) را بخواند: کدام بخش‌ها دستورهایی خطاب به هوش مصنوعی دارند (نادیده گرفتن قوانین، تحویل داده، اجرای فرمان، یا بیرون بردن گفت‌وگو با یک پیوند)؟ این بخش‌ها نگه داشته می‌شوند و جایشان یک یادداشت یک‌خطی می‌آید. اگر Jev پاسخ ندهد، فقط عبارت‌های آشکار تزریق نگه داشته می‌شوند. زیرعاملی که بخش‌هایی از خوانده‌هایش نگه داشته شده، گزارشش را با یک هشدار تحویل می‌دهد."
 		},
 		"decisions[id=judge.items].title": {
 			"en": "Judging many items (a tool for the model)",
@@ -6301,18 +6301,18 @@
 			"fa-IR": "غربال تزریق"
 		},
 		"features[name=injection].summary": {
-			"en": "Withholds instructions aimed at an AI before the model reads web pages, search results and MCP answers.",
-			"zh-TW": "模型讀網頁、搜尋結果和 MCP 結果之前，扣下寫給 AI 的指令。",
-			"ja-JP": "モデルが Web ページ、検索結果、MCP の応答を読む前に、AI に向けた指示を差し止めます。",
-			"ko-KR": "모델이 웹 페이지, 검색 결과, MCP 응답을 읽기 전에 AI를 겨냥한 지시를 보류합니다.",
-			"de-DE": "Hält Anweisungen an eine KI zurück, bevor das Modell Webseiten, Suchergebnisse und MCP-Antworten liest.",
-			"fr-FR": "Retient les instructions destinées à une IA avant que le modèle lise des pages web, des résultats de recherche et des réponses MCP.",
-			"es-ES": "Retiene las instrucciones dirigidas a una IA antes de que el modelo lea páginas web, resultados de búsqueda y respuestas MCP.",
-			"pt-BR": "Retém instruções dirigidas a uma IA antes de o modelo ler páginas web, resultados de busca e respostas MCP.",
-			"ru-RU": "Задерживает инструкции, адресованные ИИ, прежде чем модель прочтёт веб-страницы, результаты поиска и ответы MCP.",
-			"uk-UA": "Затримує інструкції, адресовані ШІ, перш ніж модель прочитає вебсторінки, результати пошуку та відповіді MCP.",
-			"tr-TR": "Model web sayfalarını, arama sonuçlarını ve MCP yanıtlarını okumadan önce yapay zekâya yönelik talimatları alıkoyar.",
-			"fa-IR": "پیش از آنکه مدل صفحه‌های وب، نتایج جست‌وجو و پاسخ‌های MCP را بخواند، دستورهای خطاب به هوش مصنوعی را نگه می‌دارد."
+			"en": "Withholds instructions aimed at an AI before the model reads web pages, search results, MCP answers and what shell commands fetch from other machines.",
+			"zh-TW": "模型讀網頁、搜尋結果、MCP 結果和 shell 指令從別的機器取回的內容之前，扣下寫給 AI 的指令。",
+			"ja-JP": "モデルが Web ページ、検索結果、MCP の応答、シェルコマンドが別のマシンから取得した内容を読む前に、AI に向けた指示を差し止めます。",
+			"ko-KR": "모델이 웹 페이지, 검색 결과, MCP 응답, 셸 명령이 다른 컴퓨터에서 가져온 내용을 읽기 전에 AI를 겨냥한 지시를 보류합니다.",
+			"de-DE": "Hält Anweisungen an eine KI zurück, bevor das Modell Webseiten, Suchergebnisse, MCP-Antworten und das liest, was Shell-Befehle von anderen Rechnern holen.",
+			"fr-FR": "Retient les instructions destinées à une IA avant que le modèle lise des pages web, des résultats de recherche, des réponses MCP et ce que des commandes shell récupèrent sur d'autres machines.",
+			"es-ES": "Retiene las instrucciones dirigidas a una IA antes de que el modelo lea páginas web, resultados de búsqueda, respuestas MCP y lo que los comandos de shell traen de otras máquinas.",
+			"pt-BR": "Retém instruções dirigidas a uma IA antes de o modelo ler páginas web, resultados de busca, respostas MCP e o que comandos de shell trazem de outras máquinas.",
+			"ru-RU": "Задерживает инструкции, адресованные ИИ, прежде чем модель прочтёт веб-страницы, результаты поиска, ответы MCP и то, что shell-команды получают с других машин.",
+			"uk-UA": "Затримує інструкції, адресовані ШІ, перш ніж модель прочитає вебсторінки, результати пошуку, відповіді MCP і те, що shell-команди отримують з інших машин.",
+			"tr-TR": "Model web sayfalarını, arama sonuçlarını, MCP yanıtlarını ve kabuk komutlarının başka makinelerden getirdiklerini okumadan önce yapay zekâya yönelik talimatları alıkoyar.",
+			"fa-IR": "پیش از آنکه مدل صفحه‌های وب، نتایج جست‌وجو، پاسخ‌های MCP و آنچه فرمان‌های shell از ماشین‌های دیگر می‌آورند را بخواند، دستورهای خطاب به هوش مصنوعی را نگه می‌دارد."
 		},
 		"features[name=injection].options[key=tools].label": {
 			"en": "Tools screened",
@@ -6537,6 +6537,34 @@
 			"uk-UA": "байтів",
 			"tr-TR": "bayt",
 			"fa-IR": "بایت"
+		},
+		"features[name=injection].options[key=fetchCommands].label": {
+			"en": "Fetching commands",
+			"zh-TW": "算作外取的指令",
+			"ja-JP": "外部取得とみなすコマンド",
+			"ko-KR": "외부 가져오기로 보는 명령",
+			"de-DE": "Abrufende Befehle",
+			"fr-FR": "Commandes de récupération",
+			"es-ES": "Comandos que descargan",
+			"pt-BR": "Comandos que buscam conteúdo",
+			"ru-RU": "Команды загрузки",
+			"uk-UA": "Команди завантаження",
+			"tr-TR": "Getiren komutlar",
+			"fa-IR": "فرمان‌های دریافت"
+		},
+		"features[name=injection].options[key=fetchCommands].help": {
+			"en": "When a bash or PowerShell command runs one of these programs, its output is screened, unless every address it is given is on this machine (localhost); gh and glab always are. Empty: no shell output is screened.",
+			"zh-TW": "bash 或 PowerShell 指令用到這些程式時，輸出要篩；給的位址全在本機（localhost）時不篩，gh 和 glab 一律要篩。留空：不篩 shell 輸出。",
+			"ja-JP": "bash または PowerShell のコマンドがこれらのプログラムを実行すると、その出力を選別します。渡されたアドレスがすべてこのマシン（localhost）なら選別しません。gh と glab は常に選別します。空にすると、シェルの出力は選別しません。",
+			"ko-KR": "bash나 PowerShell 명령이 이 프로그램 중 하나를 실행하면 그 출력을 선별합니다. 주어진 주소가 모두 이 컴퓨터(localhost)이면 선별하지 않으며, gh와 glab은 항상 선별합니다. 비워 두면 셸 출력은 선별하지 않습니다.",
+			"de-DE": "Führt ein bash- oder PowerShell-Befehl eines dieser Programme aus, wird seine Ausgabe geprüft, außer alle angegebenen Adressen liegen auf diesem Rechner (localhost); gh und glab immer. Leer: Keine Shell-Ausgabe wird geprüft.",
+			"fr-FR": "Quand une commande bash ou PowerShell lance l'un de ces programmes, sa sortie est filtrée, sauf si toutes les adresses données sont sur cette machine (localhost) ; gh et glab le sont toujours. Vide : aucune sortie shell n'est filtrée.",
+			"es-ES": "Cuando un comando de bash o PowerShell ejecuta uno de estos programas, su salida se filtra, salvo que todas las direcciones que recibe estén en esta máquina (localhost); gh y glab siempre se filtran. Vacío: no se filtra ninguna salida de shell.",
+			"pt-BR": "Quando um comando bash ou PowerShell executa um destes programas, a saída é triada, a menos que todos os endereços dados estejam nesta máquina (localhost); gh e glab sempre são. Vazio: nenhuma saída de shell é triada.",
+			"ru-RU": "Когда команда bash или PowerShell запускает одну из этих программ, её вывод проверяется, если только все переданные адреса не на этой машине (localhost); gh и glab проверяются всегда. Пусто: вывод shell не проверяется.",
+			"uk-UA": "Коли команда bash чи PowerShell запускає одну з цих програм, її вивід перевіряється, якщо лише всі передані адреси не на цій машині (localhost); gh і glab перевіряються завжди. Порожньо: вивід shell не перевіряється.",
+			"tr-TR": "Bir bash veya PowerShell komutu bu programlardan birini çalıştırdığında çıktısı taranır; verilen tüm adresler bu makinedeyse (localhost) taranmaz, gh ve glab her zaman taranır. Boş: hiçbir kabuk çıktısı taranmaz.",
+			"fa-IR": "وقتی یک فرمان bash یا PowerShell یکی از این برنامه‌ها را اجرا کند، خروجی‌اش غربال می‌شود، مگر اینکه همهٔ نشانی‌هایی که می‌گیرد روی همین ماشین (localhost) باشند؛ gh و glab همیشه غربال می‌شوند. خالی: هیچ خروجی shell غربال نمی‌شود."
 		}
 	}
 }

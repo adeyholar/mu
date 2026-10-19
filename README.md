@@ -97,7 +97,7 @@ Each decision point is `active` (the default), `shadow` (asked and logged, chang
 | `tool.risk` | A command the rules flag: did you ask for it? | Unsure means asking you |
 | `tool.approval` | In the *Jev approves* mode: does the task clearly need this command, this change outside the project, this outside action, this sub-agent? | Only what it is sure of runs; the rest asks you |
 | `tool.constraint` | Before a call that changes something: does it cross a constraint you stated? | The call is stopped |
-| `tool.injection` | A web page, a search result or an MCP server's output, passage by passage: does it carry instructions aimed at the AI? | Those passages never reach the model; a note marks where each was |
+| `tool.injection` | A web page, a search result, an MCP server's output or what a command fetched from another machine (`curl`, `gh issue view`), passage by passage: does it carry instructions aimed at the AI? | Those passages never reach the model; a note marks where each was. A sub-agent that read such passages hands back its report under a warning |
 | `files.locate` | Which files match what you describe? | Candidates ranked, instead of a string of greps |
 | `judge.items` | The model's own yes/no question, about each of many items: files, log lines, findings | A probability per item, through the `judge_items` tool, instead of reading them all |
 | `browser.step` | Observe, one judgment, act: what is the next operation, on which element? | The built-in browser moves one step |

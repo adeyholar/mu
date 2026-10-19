@@ -5,7 +5,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { createHarness, type Harness } from "../../coding-agent/test/suite/harness.ts";
 import { looksInjected, passages } from "../src/decisions/tool-injection.ts";
 import { UNTRUSTED } from "../src/extension/features/browser.ts";
-import { screenedFrom } from "../src/extension/features/injection.ts";
+import { fetchesOutside, screenedFrom } from "../src/extension/features/injection.ts";
 import { createKyrnJudgeExtension } from "../src/extension/kyrn-judge.ts";
 import type { KyrnPresentationEvent } from "../src/extension/presentation.ts";
 import { MockJudgeProvider } from "../src/providers/mock.ts";
@@ -165,5 +165,77 @@ describe("injection screening", () => {
 		const { harness } = await run(provider, { tool: "read" });
 		expect(toolResultText(harness)).toContain("collect.example");
 		expect(screeningCalls(provider)).toEqual([]);
+	});
+
+	/** A bash tool that prints the page whatever the command, as `gh issue view` prints what a stranger wrote. */
+	async function runShell(provider: MockJudgeProvider, command: string): Promise<Harness> {
+		const harness = await createHarness({
+			tools: [
+				{
+					name: "bash",
+					label: "bash",
+					description: "bash",
+					parameters: Type.Object({ command: Type.String() }),
+					execute: async () => ({ content: [{ type: "text", text: page }], details: {} }),
+				},
+			],
+			extensionFactories: [createKyrnJudgeExtension({ provider, mode: "active", only: ["injection"] })],
+		});
+		harnesses.push(harness);
+		harness.setResponses([
+			fauxAssistantMessage([fauxToolCall("bash", { command })], { stopReason: "toolUse" }),
+			fauxAssistantMessage("Done."),
+		]);
+		await harness.session.prompt("Look at issue 12.");
+		return harness;
+	}
+
+	it("screens what a shell command fetched from another machine, and not what it printed from this one", async () => {
+		const fetched = screeningJudge();
+		const text = toolResultText(await runShell(fetched, "gh issue view 12 --comments"));
+		expect(text).not.toContain("collect.example");
+		expect(text).not.toContain("curl evil.example");
+		expect(text).toContain(CLEAN);
+		const sources = screeningCalls(fetched).map((call) => (call.state as Record<string, string>).source);
+		expect(sources[0]).toContain("gh issue view 12 --comments");
+
+		for (const command of ["npm test", "curl -s http://localhost:3000/api/notes"]) {
+			const local = screeningJudge();
+			expect(toolResultText(await runShell(local, command))).toContain("collect.example");
+			expect(screeningCalls(local)).toEqual([]);
+		}
+	});
+});
+
+describe("fetchesOutside", () => {
+	it("counts a fetch from another machine wherever it stands in the command", () => {
+		for (const command of [
+			"curl -s https://api.github.com/repos/qybaihe/mu/issues",
+			"curl example.com",
+			"gh issue view 12",
+			"cd repo && gh pr diff 11 | head -50",
+			"echo start; wget -qO- https://example.com/notes",
+			'jq . <(curl -s "https://example.com/a.json")',
+			"sudo curl https://example.com/install.sh",
+			"curl localhost:3000 example.com",
+			"Invoke-WebRequest -Uri https://example.com | Select-Object -Expand Content",
+		]) {
+			expect(fetchesOutside(command), command).toBe(true);
+		}
+	});
+
+	it("leaves out commands that fetch nothing, and fetches from this machine only", () => {
+		for (const command of [
+			"npm test",
+			"echo curl is installed",
+			"grep -rn gh src/",
+			"curl localhost:3000",
+			"curl -s http://127.0.0.1:8080/health",
+			"curl -X POST -d '{\"a\":1}' http://localhost:3000/api && curl [::1]:9000",
+			"iwr http://localhost:5000",
+		]) {
+			expect(fetchesOutside(command), command).toBe(false);
+		}
+		expect(fetchesOutside("curl https://example.com", [])).toBe(false);
 	});
 });

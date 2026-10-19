@@ -118,13 +118,14 @@ On by default: yes. Decision points: `tool.constraint`.
 
 ## injection
 
-**Injection screening.** Withholds instructions aimed at an AI before the model reads web pages, search results and MCP answers.
+**Injection screening.** Withholds instructions aimed at an AI before the model reads web pages, search results, MCP answers and what shell commands fetch from other machines.
 
 On by default: yes. Decision points: `tool.injection`.
 
 | Option | Default | Meaning |
 | --- | --- | --- |
 | `tools` | `web_fetch`, `web_search`, `browse`, `mcp__*` | Tools screened. Tool names, or a prefix ending in *; mcp__* is every MCP server. |
+| `fetchCommands` | `curl`, `wget`, `gh`, `glab`, `lynx`, `w3m`, `Invoke-WebRequest`, `Invoke-RestMethod`, `iwr`, `irm` | Fetching commands. When a bash or PowerShell command runs one of these programs, its output is screened, unless every address it is given is on this machine (localhost); gh and glab always are. Empty: no shell output is screened. |
 | `waitMs` | `6000` ms | Wait at most. After this only plain injection phrases are withheld, by rule; the verdict is still recorded. Range 500 to 30000. |
 
 ## admission
