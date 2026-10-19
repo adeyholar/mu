@@ -53,6 +53,7 @@ import { registerNotify } from "./features/notify.ts";
 import { registerPacks } from "./features/packs.ts";
 import { registerPermissions } from "./features/permissions.ts";
 import { registerPreflight } from "./features/preflight.ts";
+import { registerProcedures } from "./features/procedures.ts";
 import { registerSkills } from "./features/skills.ts";
 import { registerSwarm, type SwarmRunner } from "./features/swarm.ts";
 import { registerSwarmChild } from "./features/swarm-child.ts";
@@ -98,6 +99,7 @@ export type FeatureName =
 	| "preflight"
 	| "frame"
 	| "memory"
+	| "procedures"
 	| "skills"
 	| "catalog"
 	| "guard"
@@ -194,6 +196,7 @@ function registerKyrn(pi: ExtensionAPI, options: KyrnJudgeExtensionOptions): voi
 		// Right after preflight, which counts the turns: the frame has to be current before anything reads it.
 		["frame", registerFrame],
 		["memory", (shared) => registerMemory(shared, roots)],
+		["procedures", (shared) => registerProcedures(shared, roots)],
 		["skills", registerSkills],
 		// Registered before the features that add capabilities, and that is fine: it reads the catalog when a turn starts.
 		["catalog", registerCatalog],

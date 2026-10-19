@@ -18,7 +18,7 @@
   <b>English</b> · <a href="docs/readme/README.zh-CN.md">简体中文</a> · <a href="docs/readme/README.zh-TW.md">繁體中文</a> · <a href="docs/readme/README.ja.md">日本語</a> · <a href="docs/readme/README.ko.md">한국어</a>
 </p>
 
-A coding agent makes hundreds of decisions per session that are not about the code: what stays in the context, whether a command is safe, whether a finding is worth telling another agent, when the work is done. Left to the big model, they cost tokens, latency and attention. Left to fixed rules, they are wrong too often. mu gives them to a **judge**: a small, fast model that answers one bounded question at a time, at 39 decision points in every turn. The big model keeps its attention for the work.
+A coding agent makes hundreds of decisions per session that are not about the code: what stays in the context, whether a command is safe, whether a finding is worth telling another agent, when the work is done. Left to the big model, they cost tokens, latency and attention. Left to fixed rules, they are wrong too often. mu gives them to a **judge**: a small, fast model that answers one bounded question at a time, at 40 decision points in every turn. The big model keeps its attention for the work.
 
 - **mu**: the command line. Everything pi does, plus the judgment kernel.
 - **mu desktop**: a native app that carries mu and its runtime. Download, connect a model, start.
@@ -88,6 +88,7 @@ Each decision point is `active` (the default), `shadow` (asked and logged, chang
 | `memory.worth` | A lesson the model or a sub-agent proposes: useful again, a one-off, or known already? | Kept or dropped |
 | `memory.merge` | The same as an existing lesson, more precise, or contradicting it? | No duplicates; the more precise one replaces the older |
 | `memory.applied` | Were the recalled lessons followed this turn? | A lesson recalled often and never followed retires |
+| `skill.capture` | A long run ended well: was it a procedure, the same steps for the next task of its kind? | It is drafted as a skill and waits for you: `/skills accept` installs it |
 | `cache.warming` | Will you be back before the prompt cache expires? | The cache is refreshed, or left to expire |
 
 **Tools and safety**
@@ -253,6 +254,7 @@ Node 22.19 or newer. `mu -p "prompt"` runs once and prints; `mu -c` continues th
 | `/permissions` | Full access / Jev approves / minimal |
 | `/board` | The plain-language board on or off |
 | `/remember`, `/lessons`, `/forget` | Keep a lesson, list them, retire one |
+| `/skills` | The skills mu drafted from runs: show, accept or reject each |
 | `/review`, `/commit` | Review the change with findings ranked P0 to P3; write the commits |
 | `/checkpoints`, `/rewind` | List the checkpoints; go back to one |
 | `/agents`, `/swarm` | Send sub-agents; watch every one at work |

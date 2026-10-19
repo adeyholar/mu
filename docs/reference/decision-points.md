@@ -2,7 +2,7 @@
 
 # Decision points
 
-Every decision point mu has, 39 in all, grouped as the desktop app's settings group them. Each is asked as a short question about a small state; [How mu works](../architecture.md) explains the engine and [Judges](../judges.md) who answers.
+Every decision point mu has, 40 in all, grouped as the desktop app's settings group them. Each is asked as a short question about a small state; [How mu works](../architecture.md) explains the engine and [Judges](../judges.md) who answers.
 
 Each point has a mode:
 
@@ -38,6 +38,7 @@ The feature column names the switch in `features` that turns the whole behaviour
 | `memory.worth` | Worth keeping | For a lesson the model keeps with the remember tool, or a Lesson: line in a sub-agent's report: useful again later, a one-off, or known already from the prompt or the project files. Only the first kind is kept. | [`memory`](features.md#memory) |
 | `memory.merge` | Lesson merging | Before a new lesson is stored, compares it with the most similar kept ones: the same lesson is not kept twice, a more precise one replaces the old, and on a contradiction your latest word wins. | [`memory`](features.md#memory) |
 | `memory.applied` | Lesson followed | At the end of a turn, judges whether the lessons brought into it were followed. A lesson recalled many times and never followed is retired. | [`memory`](features.md#memory) |
+| `skill.capture` | Drafting a procedure as a skill | After a long run that ran commands and ended well, judges whether it was a reusable procedure (the same steps would do the next task of its kind), work for this one task, or covered by an installed skill. A procedure is drafted as a skill by the writer model and waits until you install it with /skills accept. Asked at most once a turn, never for an ordinary turn. | [`procedures`](features.md#procedures) |
 | `cache.warming` | Cache warming | Guesses whether you will be back soon, to decide on refreshing the prompt cache before it expires. | [`warming`](features.md#warming) |
 
 ## Tools and safety
