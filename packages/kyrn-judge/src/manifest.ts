@@ -261,6 +261,16 @@ export const MANIFEST: HarnessManifest = {
 			},
 		},
 		{
+			id: "skill.capture",
+			group: "context",
+			feature: "procedures",
+			title: { zh: "把做法起草成技能", en: "Drafting a procedure as a skill" },
+			summary: {
+				zh: "一次步骤多、跑过命令、以成功收尾的运行结束后，判断它是不是一套可复用的做法（同样的步骤能做下一件同类的事），还是只为这一件事、或者已有技能覆盖了。是做法就由写作模型起草成技能，放进待审区，等你 /skills accept 才安装。每回合最多问一次，普通回合不问。",
+				en: "After a long run that ran commands and ended well, judges whether it was a reusable procedure (the same steps would do the next task of its kind), work for this one task, or covered by an installed skill. A procedure is drafted as a skill by the writer model and waits until you install it with /skills accept. Asked at most once a turn, never for an ordinary turn.",
+			},
+		},
+		{
 			id: "cache.warming",
 			group: "context",
 			feature: "warming",
@@ -739,6 +749,53 @@ export const MANIFEST: HarnessManifest = {
 					label: {
 						zh: "回合结束时检查经验有没有被照做",
 						en: "Check at the end of a turn whether lessons were followed",
+					},
+				},
+			],
+		},
+		{
+			name: "procedures",
+			title: { zh: "做法变技能", en: "Procedures as skills" },
+			summary: {
+				zh: "一次成功的长运行如果是一套可复用的做法，起草成技能放进待审区：/skills 列出草稿，/skills show、accept、reject 查看、安装、丢掉。不经你同意不安装任何技能。",
+				en: "When a long run that ended well was a reusable procedure, drafts it as a skill and keeps it for you: /skills lists the drafts, /skills show, accept and reject read, install and drop one. No skill is installed without you.",
+			},
+			defaultEnabled: true,
+			options: [
+				{
+					key: "minSteps",
+					kind: "number",
+					default: 6,
+					min: 2,
+					max: 100,
+					label: { zh: "至少多少步", en: "Steps at least" },
+					help: {
+						zh: "少于这么多步的运行不问。",
+						en: "Runs with fewer steps are not asked about.",
+					},
+				},
+				{
+					key: "minCommands",
+					kind: "number",
+					default: 2,
+					min: 0,
+					max: 50,
+					label: { zh: "至少多少条命令", en: "Commands at least" },
+					help: {
+						zh: "跑过的 shell 命令少于这么多的运行不问：做法总要做点什么。",
+						en: "Runs that ran fewer shell commands are not asked about: a procedure does something.",
+					},
+				},
+				{
+					key: "maxPending",
+					kind: "number",
+					default: 3,
+					min: 1,
+					max: 20,
+					label: { zh: "每个项目最多待审", en: "Drafts waiting per project" },
+					help: {
+						zh: "一个项目的草稿攒到这么多，就不再起草，等你先看。",
+						en: "Once a project has this many drafts waiting, no more are made until you have looked at them.",
 					},
 				},
 			],

@@ -89,6 +89,18 @@ On by default: yes. Decision points: `memory.recall`, `memory.capture`, `memory.
 | `outcome` | `true` | Learn from the agent getting unstuck. Needs the writer model or the conversation's model to put the lesson into words. |
 | `applied` | `true` | Check at the end of a turn whether lessons were followed. |
 
+## procedures
+
+**Procedures as skills.** When a long run that ended well was a reusable procedure, drafts it as a skill and keeps it for you: /skills lists the drafts, /skills show, accept and reject read, install and drop one. No skill is installed without you.
+
+On by default: yes. Decision points: `skill.capture`.
+
+| Option | Default | Meaning |
+| --- | --- | --- |
+| `minSteps` | `6` | Steps at least. Runs with fewer steps are not asked about. Range 2 to 100. |
+| `minCommands` | `2` | Commands at least. Runs that ran fewer shell commands are not asked about: a procedure does something. Range 0 to 50. |
+| `maxPending` | `3` | Drafts waiting per project. Once a project has this many drafts waiting, no more are made until you have looked at them. Range 1 to 20. |
+
 ## guard
 
 **Risky command guard.** Confirms dangerous commands before they run.
