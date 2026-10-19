@@ -2,7 +2,7 @@
 
 # Decision points
 
-Every decision point mu has, 38 in all, grouped as the desktop app's settings group them. Each is asked as a short question about a small state; [How mu works](../architecture.md) explains the engine and [Judges](../judges.md) who answers.
+Every decision point mu has, 39 in all, grouped as the desktop app's settings group them. Each is asked as a short question about a small state; [How mu works](../architecture.md) explains the engine and [Judges](../judges.md) who answers.
 
 Each point has a mode:
 
@@ -48,6 +48,7 @@ The feature column names the switch in `features` that turns the whole behaviour
 | `tool.approval` | Jev approves for you | In Jev-approves mode, commands, changes outside the project, outside actions and sub-agents go to Jev first: only what it is sure the task needs, done as you would expect, runs without you; anything else asks you in the status bar. | [`permissions`](features.md#permissions) |
 | `tool.constraint` | Hard constraint gate | What you ruled out is kept word for word in the task frame; before a call that changes something, each constraint is checked, and only a confident violation is stopped, in your own words. | [`constraints`](features.md#constraints) |
 | `tool.injection` | Instructions in outside content | Before the model reads a web page, search results, an MCP server's answer or what a shell command fetched from another machine (curl, gh issue view): which passages carry instructions aimed at an AI (ignore rules, hand over data, run commands, or carry the conversation out through a link)? Those are withheld and replaced by a one-line note. When Jev gives no answer, only plain injection phrases are withheld. A sub-agent that had passages withheld from what it read hands back its report under a warning. | [`injection`](features.md#injection) |
+| `tool.description` | Orders hidden in MCP tool descriptions | An MCP server writes its own tool descriptions, and the model reads them as part of its tool list. Asked once per tool when it first appears and when its description changes: does the description ask the AI to do more than call this tool (read files or secrets it does not need, send data elsewhere, change how it treats other tools or you, keep something from you)? If so, the tool is taken off the list, calls to it are refused, and you are told. When Jev gives no answer, only plain markers such as an <IMPORTANT> block or "do not tell the user" count. | [`injection`](features.md#injection) |
 | `files.locate` | File location | Describe what you are looking for; the judge ranks candidate files instead of a string of greps. | [`locate`](features.md#locate) |
 | `judge.items` | Judging many items (a tool for the model) | When the model has to sort hundreds of files, log lines or findings, it hands Jev one yes/no question to answer item by item, with a probability each, instead of reading them all. It appears only when a task needs it. The model asked, so it answers in shadow too; off turns it away. | [`judgeItems`](features.md#judgeitems) |
 | `browser.step` | Browser steps | Each browser step is observe, one judgment, act: the judge picks the next operation and its target. | [`browser`](features.md#browser) |

@@ -52,6 +52,7 @@ export interface KyrnPresentationEvent {
 		| "web.fetch"
 		| "web.search"
 		| "tool.injection"
+		| "tool.description"
 		| "swarm.worktree.created"
 		| "swarm.patch.ready"
 		| "swarm.patch.applied"

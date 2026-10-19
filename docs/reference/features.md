@@ -118,15 +118,17 @@ On by default: yes. Decision points: `tool.constraint`.
 
 ## injection
 
-**Injection screening.** Withholds instructions aimed at an AI before the model reads web pages, search results, MCP answers and what shell commands fetch from other machines.
+**Injection screening.** Withholds instructions aimed at an AI before the model reads web pages, search results, MCP answers and what shell commands fetch from other machines, and takes MCP tools whose descriptions carry such orders off the tool list.
 
-On by default: yes. Decision points: `tool.injection`.
+On by default: yes. Decision points: `tool.injection`, `tool.description`.
 
 | Option | Default | Meaning |
 | --- | --- | --- |
 | `tools` | `web_fetch`, `web_search`, `browse`, `mcp__*` | Tools screened. Tool names, or a prefix ending in *; mcp__* is every MCP server. |
 | `fetchCommands` | `curl`, `wget`, `gh`, `glab`, `lynx`, `w3m`, `Invoke-WebRequest`, `Invoke-RestMethod`, `iwr`, `irm` | Fetching commands. When a bash or PowerShell command runs one of these programs, its output is screened, unless every address it is given is on this machine (localhost); gh and glab always are. Empty: no shell output is screened. |
 | `waitMs` | `6000` ms | Wait at most. After this only plain injection phrases are withheld, by rule; the verdict is still recorded. Range 500 to 30000. |
+| `descriptions` | `true` | Screen MCP tool descriptions. MCP tools whose descriptions ask the AI for more than using them are taken off the list (tool.description). |
+| `descriptionWaitMs` | `8000` ms | Wait for tool descriptions at most. How long a turn waits for verdicts on MCP tools it has not seen before. After this the rules decide until the verdict lands. Range 500 to 30000. |
 
 ## admission
 
