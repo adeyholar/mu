@@ -1,3 +1,4 @@
+import { DESCRIPTION_THRESHOLD } from "../../decisions/tool-description.ts";
 import {
 	INJECTION_THRESHOLD,
 	type InjectionOutcome,
@@ -9,6 +10,7 @@ import {
 } from "../../decisions/tool-injection.ts";
 import { clip, failOpen, type KyrnRuntime, textOf, within } from "../runtime.ts";
 import { UNTRUSTED } from "./browser.ts";
+import { registerToolDescriptions } from "./tool-descriptions.ts";
 import { SEARCH_UNTRUSTED } from "./web.ts";
 
 /** What one batched request may carry in passages, so even text in Chinese stays well inside the judge's window. */
@@ -108,9 +110,23 @@ export function registerInjection(runtime: KyrnRuntime): void {
 		concurrency: 4,
 		/** A verdict later than this leaves the result to the rules: a page is not held longer than that. */
 		waitMs: 6000,
+		/** Screen MCP tools' own descriptions for orders beyond using the tool (tool.description, tool-descriptions.ts). */
+		descriptions: true,
+		descriptionThreshold: DESCRIPTION_THRESHOLD,
+		/** How long a turn waits for verdicts on MCP tools it has not seen before. */
+		descriptionWaitMs: 8000,
 	});
 	if (!options.enabled) return;
 	const { pi } = runtime;
+	if (options.descriptions) {
+		registerToolDescriptions(runtime, {
+			threshold: options.descriptionThreshold,
+			passageChars: options.passageChars,
+			batchChars: BATCH_STATE_CHARS,
+			concurrency: options.concurrency,
+			waitMs: options.descriptionWaitMs,
+		});
+	}
 
 	const screened = (toolName: string): boolean => {
 		const namespace = pi.getAllTools().find((tool) => tool.name === toolName)?.namespace?.name;

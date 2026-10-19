@@ -880,6 +880,41 @@
 			}
 		},
 		{
+			"id": "tool.description",
+			"group": "tools",
+			"feature": "injection",
+			"title": {
+				"zh": "MCP 工具说明里的私货",
+				"en": "Orders hidden in MCP tool descriptions",
+				"zh-TW": "MCP 工具說明裡的私貨",
+				"ja-JP": "MCP ツールの説明に隠れた指示",
+				"ko-KR": "MCP 도구 설명에 숨은 지시",
+				"de-DE": "Versteckte Anweisungen in MCP-Werkzeugbeschreibungen",
+				"fr-FR": "Ordres cachés dans les descriptions d'outils MCP",
+				"es-ES": "Órdenes ocultas en las descripciones de herramientas MCP",
+				"pt-BR": "Ordens escondidas nas descrições de ferramentas MCP",
+				"ru-RU": "Скрытые указания в описаниях инструментов MCP",
+				"uk-UA": "Приховані вказівки в описах інструментів MCP",
+				"tr-TR": "MCP araç açıklamalarına gizlenmiş talimatlar",
+				"fa-IR": "دستورهای پنهان در توضیح ابزارهای MCP"
+			},
+			"summary": {
+				"zh": "MCP 服务器自己写工具说明，模型把它当工具列表的一部分来读。每个工具第一次出现、说明变了时问一次：这段说明是不是要 AI 做调用这个工具以外的事（读用不着的文件或密钥、把数据发到别处、改变它对待别的工具或你的方式、瞒着你）？是的话这个工具从列表里拿掉，调用也被拒绝，并告诉你。Jev 没答上来时，只按 <IMPORTANT> 块、「别告诉用户」这类明显标记处理。",
+				"en": "An MCP server writes its own tool descriptions, and the model reads them as part of its tool list. Asked once per tool when it first appears and when its description changes: does the description ask the AI to do more than call this tool (read files or secrets it does not need, send data elsewhere, change how it treats other tools or you, keep something from you)? If so, the tool is taken off the list, calls to it are refused, and you are told. When Jev gives no answer, only plain markers such as an <IMPORTANT> block or \"do not tell the user\" count.",
+				"zh-TW": "MCP 伺服器自己寫工具說明，模型把它當成工具列表的一部分來讀。每個工具第一次出現、說明變了時問一次：這段說明是不是要 AI 做呼叫這個工具以外的事（讀用不著的檔案或金鑰、把資料送到別處、改變它對待別的工具或你的方式、瞞著你）？是的話，這個工具會從列表裡拿掉，呼叫也會被拒絕，並告訴你。Jev 沒答上來時，只按 <IMPORTANT> 區塊、「別告訴使用者」這類明顯標記處理。",
+				"ja-JP": "MCP サーバーはツールの説明を自分で書き、モデルはそれをツール一覧の一部として読みます。ツールが初めて現れたときと説明が変わったときに一度だけ確認します。その説明は、このツールを呼ぶこと以上のこと（不要なファイルや秘密情報を読む、データを別の場所へ送る、他のツールやあなたへの接し方を変える、あなたに隠しごとをする）を AI に求めていないか？求めていれば、そのツールは一覧から外され、呼び出しも拒否され、あなたに知らされます。Jev が答えないときは、<IMPORTANT> ブロックや「ユーザーに伝えるな」のような明らかな印だけで判断します。",
+				"ko-KR": "MCP 서버는 도구 설명을 직접 쓰고, 모델은 그것을 도구 목록의 일부로 읽습니다. 도구가 처음 나타날 때와 설명이 바뀔 때 한 번씩 묻습니다. 이 설명이 AI에게 이 도구를 호출하는 것 이상의 일(필요 없는 파일이나 비밀 읽기, 데이터를 다른 곳으로 보내기, 다른 도구나 당신을 대하는 방식 바꾸기, 당신에게 숨기기)을 요구하는가? 그렇다면 그 도구는 목록에서 빠지고, 호출도 거부되며, 당신에게 알려집니다. Jev가 답하지 못하면 <IMPORTANT> 블록이나 \"사용자에게 말하지 마라\" 같은 명백한 표시만 봅니다.",
+				"de-DE": "Ein MCP-Server schreibt die Beschreibungen seiner Werkzeuge selbst, und das Modell liest sie als Teil seiner Werkzeugliste. Einmal pro Werkzeug gefragt, wenn es zuerst erscheint und wenn sich seine Beschreibung ändert: Verlangt die Beschreibung von der KI mehr, als dieses Werkzeug aufzurufen (Dateien oder Geheimnisse lesen, die es nicht braucht, Daten anderswohin senden, ändern, wie sie mit anderen Werkzeugen oder mit Ihnen umgeht, Ihnen etwas verschweigen)? Dann wird das Werkzeug von der Liste genommen, Aufrufe werden abgelehnt, und Sie werden informiert. Antwortet Jev nicht, zählen nur eindeutige Merkmale wie ein <IMPORTANT>-Block oder „sag es dem Nutzer nicht\".",
+				"fr-FR": "Un serveur MCP écrit lui-même les descriptions de ses outils, et le modèle les lit comme une partie de sa liste d'outils. Posée une fois par outil, à sa première apparition et quand sa description change : la description demande-t-elle à l'IA plus que d'appeler cet outil (lire des fichiers ou des secrets dont il n'a pas besoin, envoyer des données ailleurs, changer sa façon de traiter les autres outils ou vous, vous cacher quelque chose) ? Si oui, l'outil est retiré de la liste, ses appels sont refusés, et vous êtes prévenu. Si Jev ne répond pas, seuls comptent des marqueurs évidents comme un bloc <IMPORTANT> ou « ne le dis pas à l'utilisateur ».",
+				"es-ES": "Un servidor MCP escribe las descripciones de sus propias herramientas, y el modelo las lee como parte de su lista de herramientas. Se pregunta una vez por herramienta, cuando aparece por primera vez y cuando cambia su descripción: ¿la descripción pide a la IA algo más que llamar a esta herramienta (leer archivos o secretos que no necesita, enviar datos a otro lugar, cambiar cómo trata a otras herramientas o a ti, ocultarte algo)? Si es así, la herramienta se quita de la lista, sus llamadas se rechazan y se te avisa. Si Jev no responde, solo cuentan marcas evidentes como un bloque <IMPORTANT> o «no se lo digas al usuario».",
+				"pt-BR": "Um servidor MCP escreve as descrições das próprias ferramentas, e o modelo as lê como parte da sua lista de ferramentas. Perguntado uma vez por ferramenta, quando ela aparece pela primeira vez e quando a descrição muda: a descrição pede à IA mais do que chamar esta ferramenta (ler arquivos ou segredos de que ela não precisa, enviar dados para outro lugar, mudar como trata outras ferramentas ou você, esconder algo de você)? Se sim, a ferramenta sai da lista, as chamadas a ela são recusadas e você é avisado. Se o Jev não responder, só contam marcas evidentes como um bloco <IMPORTANT> ou \"não conte ao usuário\".",
+				"ru-RU": "MCP-сервер сам пишет описания своих инструментов, и модель читает их как часть списка инструментов. Вопрос задаётся один раз для каждого инструмента, когда он впервые появляется и когда меняется его описание: требует ли описание от ИИ большего, чем вызвать этот инструмент (читать ненужные ему файлы или секреты, отправлять данные куда-то ещё, менять отношение к другим инструментам или к вам, что-то от вас скрывать)? Если да, инструмент убирается из списка, его вызовы отклоняются, и вам об этом сообщают. Если Jev не ответил, учитываются только явные признаки вроде блока <IMPORTANT> или «не говори пользователю».",
+				"uk-UA": "MCP-сервер сам пише описи своїх інструментів, і модель читає їх як частину списку інструментів. Питання ставиться один раз для кожного інструмента, коли він уперше з'являється і коли змінюється його опис: чи вимагає опис від ШІ більшого, ніж викликати цей інструмент (читати непотрібні йому файли чи секрети, надсилати дані деінде, змінювати ставлення до інших інструментів чи до вас, щось від вас приховувати)? Якщо так, інструмент прибирається зі списку, його виклики відхиляються, і вам про це повідомляють. Якщо Jev не відповів, враховуються лише явні ознаки на кшталт блоку <IMPORTANT> чи «не кажи користувачу».",
+				"tr-TR": "Bir MCP sunucusu kendi araçlarının açıklamalarını kendisi yazar ve model bunları araç listesinin bir parçası olarak okur. Her araç için, ilk göründüğünde ve açıklaması değiştiğinde bir kez sorulur: açıklama yapay zekâdan bu aracı çağırmaktan fazlasını mı istiyor (aracın gerek duymadığı dosyaları veya gizli bilgileri okumak, verileri başka bir yere göndermek, diğer araçlara ya da size davranışını değiştirmek, sizden bir şey saklamak)? Öyleyse araç listeden çıkarılır, çağrıları reddedilir ve size bildirilir. Jev yanıt vermezse yalnızca <IMPORTANT> bloğu veya \"kullanıcıya söyleme\" gibi açık işaretler dikkate alınır.",
+				"fa-IR": "هر سرور MCP توضیح ابزارهایش را خودش می‌نویسد و مدل آن‌ها را بخشی از فهرست ابزارهایش می‌خواند. برای هر ابزار یک بار، وقتی نخستین بار پیدا می‌شود و وقتی توضیحش عوض می‌شود، پرسیده می‌شود: آیا این توضیح از هوش مصنوعی چیزی بیش از فراخواندن همین ابزار می‌خواهد (خواندن فایل‌ها یا رازهایی که ابزار لازم ندارد، فرستادن داده به جای دیگر، تغییر رفتارش با ابزارهای دیگر یا با شما، پنهان کردن چیزی از شما)؟ اگر چنین باشد، ابزار از فهرست برداشته می‌شود، فراخوانی‌اش رد می‌شود و به شما خبر داده می‌شود. اگر Jev پاسخ ندهد، فقط نشانه‌های آشکار مانند یک بلوک <IMPORTANT> یا «به کاربر نگو» در نظر گرفته می‌شوند."
+			}
+		},
+		{
 			"id": "files.locate",
 			"group": "tools",
 			"feature": "locate",
@@ -2661,19 +2696,19 @@
 				"fa-IR": "غربال تزریق"
 			},
 			"summary": {
-				"zh": "模型读网页、搜索结果、MCP 结果和 shell 命令从别的机器取回的内容之前，扣下写给 AI 的指令。",
-				"en": "Withholds instructions aimed at an AI before the model reads web pages, search results, MCP answers and what shell commands fetch from other machines.",
-				"zh-TW": "模型讀網頁、搜尋結果、MCP 結果和 shell 指令從別的機器取回的內容之前，扣下寫給 AI 的指令。",
-				"ja-JP": "モデルが Web ページ、検索結果、MCP の応答、シェルコマンドが別のマシンから取得した内容を読む前に、AI に向けた指示を差し止めます。",
-				"ko-KR": "모델이 웹 페이지, 검색 결과, MCP 응답, 셸 명령이 다른 컴퓨터에서 가져온 내용을 읽기 전에 AI를 겨냥한 지시를 보류합니다.",
-				"de-DE": "Hält Anweisungen an eine KI zurück, bevor das Modell Webseiten, Suchergebnisse, MCP-Antworten und das liest, was Shell-Befehle von anderen Rechnern holen.",
-				"fr-FR": "Retient les instructions destinées à une IA avant que le modèle lise des pages web, des résultats de recherche, des réponses MCP et ce que des commandes shell récupèrent sur d'autres machines.",
-				"es-ES": "Retiene las instrucciones dirigidas a una IA antes de que el modelo lea páginas web, resultados de búsqueda, respuestas MCP y lo que los comandos de shell traen de otras máquinas.",
-				"pt-BR": "Retém instruções dirigidas a uma IA antes de o modelo ler páginas web, resultados de busca, respostas MCP e o que comandos de shell trazem de outras máquinas.",
-				"ru-RU": "Задерживает инструкции, адресованные ИИ, прежде чем модель прочтёт веб-страницы, результаты поиска, ответы MCP и то, что shell-команды получают с других машин.",
-				"uk-UA": "Затримує інструкції, адресовані ШІ, перш ніж модель прочитає вебсторінки, результати пошуку, відповіді MCP і те, що shell-команди отримують з інших машин.",
-				"tr-TR": "Model web sayfalarını, arama sonuçlarını, MCP yanıtlarını ve kabuk komutlarının başka makinelerden getirdiklerini okumadan önce yapay zekâya yönelik talimatları alıkoyar.",
-				"fa-IR": "پیش از آنکه مدل صفحه‌های وب، نتایج جست‌وجو، پاسخ‌های MCP و آنچه فرمان‌های shell از ماشین‌های دیگر می‌آورند را بخواند، دستورهای خطاب به هوش مصنوعی را نگه می‌دارد."
+				"zh": "模型读网页、搜索结果、MCP 结果和 shell 命令从别的机器取回的内容之前，扣下写给 AI 的指令；说明里夹带私货的 MCP 工具从列表里拿掉。",
+				"en": "Withholds instructions aimed at an AI before the model reads web pages, search results, MCP answers and what shell commands fetch from other machines, and takes MCP tools whose descriptions carry such orders off the tool list.",
+				"zh-TW": "模型讀網頁、搜尋結果、MCP 結果和 shell 指令從別的機器取回的內容之前，扣下寫給 AI 的指令；說明裡夾帶私貨的 MCP 工具從列表裡拿掉。",
+				"ja-JP": "モデルが Web ページ、検索結果、MCP の応答、シェルコマンドが別のマシンから取得した内容を読む前に、AI に向けた指示を差し止めます。説明にそうした指示を含む MCP ツールは一覧から外します。",
+				"ko-KR": "모델이 웹 페이지, 검색 결과, MCP 응답, 셸 명령이 다른 컴퓨터에서 가져온 내용을 읽기 전에 AI를 겨냥한 지시를 보류하고, 설명에 그런 지시를 담은 MCP 도구는 목록에서 뺍니다.",
+				"de-DE": "Hält Anweisungen an eine KI zurück, bevor das Modell Webseiten, Suchergebnisse, MCP-Antworten und das liest, was Shell-Befehle von anderen Rechnern holen, und nimmt MCP-Werkzeuge, deren Beschreibungen solche Anweisungen enthalten, von der Werkzeugliste.",
+				"fr-FR": "Retient les instructions destinées à une IA avant que le modèle lise des pages web, des résultats de recherche, des réponses MCP et ce que des commandes shell récupèrent sur d'autres machines, et retire de la liste les outils MCP dont la description contient de tels ordres.",
+				"es-ES": "Retiene las instrucciones dirigidas a una IA antes de que el modelo lea páginas web, resultados de búsqueda, respuestas MCP y lo que los comandos de shell traen de otras máquinas, y quita de la lista las herramientas MCP cuyas descripciones llevan tales órdenes.",
+				"pt-BR": "Retém instruções dirigidas a uma IA antes de o modelo ler páginas web, resultados de busca, respostas MCP e o que comandos de shell trazem de outras máquinas, e tira da lista as ferramentas MCP cujas descrições trazem ordens assim.",
+				"ru-RU": "Задерживает инструкции, адресованные ИИ, прежде чем модель прочтёт веб-страницы, результаты поиска, ответы MCP и то, что shell-команды получают с других машин, и убирает из списка инструменты MCP, в описаниях которых есть такие указания.",
+				"uk-UA": "Затримує інструкції, адресовані ШІ, перш ніж модель прочитає вебсторінки, результати пошуку, відповіді MCP і те, що shell-команди отримують з інших машин, і прибирає зі списку інструменти MCP, в описах яких є такі вказівки.",
+				"tr-TR": "Model web sayfalarını, arama sonuçlarını, MCP yanıtlarını ve kabuk komutlarının başka makinelerden getirdiklerini okumadan önce yapay zekâya yönelik talimatları alıkoyar; açıklamasında böyle talimatlar taşıyan MCP araçlarını listeden çıkarır.",
+				"fa-IR": "پیش از آنکه مدل صفحه‌های وب، نتایج جست‌وجو، پاسخ‌های MCP و آنچه فرمان‌های shell از ماشین‌های دیگر می‌آورند را بخواند، دستورهای خطاب به هوش مصنوعی را نگه می‌دارد و ابزارهای MCP را که توضیحشان چنین دستورهایی دارد از فهرست برمی‌دارد."
 			},
 			"defaultEnabled": true,
 			"options": [
@@ -2813,6 +2848,93 @@
 						"uk-UA": "Після цього за правилом затримуються лише явні фрази-ін'єкції; вердикт однаково записується.",
 						"tr-TR": "Bundan sonra yalnızca açık enjeksiyon ifadeleri kuralla alıkonur; karar yine de kaydedilir.",
 						"fa-IR": "پس از این، فقط عبارت‌های آشکار تزریق طبق قاعده نگه داشته می‌شوند؛ رأی همچنان ثبت می‌شود."
+					}
+				},
+				{
+					"key": "descriptions",
+					"kind": "boolean",
+					"default": true,
+					"label": {
+						"zh": "筛 MCP 工具说明",
+						"en": "Screen MCP tool descriptions",
+						"zh-TW": "篩 MCP 工具說明",
+						"ja-JP": "MCP ツールの説明を選別",
+						"ko-KR": "MCP 도구 설명 선별",
+						"de-DE": "MCP-Werkzeugbeschreibungen prüfen",
+						"fr-FR": "Filtrer les descriptions d'outils MCP",
+						"es-ES": "Filtrar las descripciones de herramientas MCP",
+						"pt-BR": "Triar descrições de ferramentas MCP",
+						"ru-RU": "Проверять описания инструментов MCP",
+						"uk-UA": "Перевіряти описи інструментів MCP",
+						"tr-TR": "MCP araç açıklamalarını tara",
+						"fa-IR": "غربال توضیح ابزارهای MCP"
+					},
+					"help": {
+						"zh": "说明里要 AI 做额外事情的 MCP 工具从列表里拿掉（tool.description）。",
+						"en": "MCP tools whose descriptions ask the AI for more than using them are taken off the list (tool.description).",
+						"zh-TW": "說明裡要 AI 做額外事情的 MCP 工具從列表裡拿掉（tool.description）。",
+						"ja-JP": "使うこと以上を AI に求める説明を持つ MCP ツールを一覧から外します（tool.description）。",
+						"ko-KR": "사용하는 것 이상을 AI에게 요구하는 설명을 가진 MCP 도구는 목록에서 뺍니다(tool.description).",
+						"de-DE": "MCP-Werkzeuge, deren Beschreibungen von der KI mehr verlangen als ihre Nutzung, werden von der Liste genommen (tool.description).",
+						"fr-FR": "Les outils MCP dont la description demande à l'IA plus que de les utiliser sont retirés de la liste (tool.description).",
+						"es-ES": "Las herramientas MCP cuyas descripciones piden a la IA más que usarlas se quitan de la lista (tool.description).",
+						"pt-BR": "Ferramentas MCP cujas descrições pedem à IA mais do que usá-las saem da lista (tool.description).",
+						"ru-RU": "Инструменты MCP, описания которых требуют от ИИ большего, чем их использование, убираются из списка (tool.description).",
+						"uk-UA": "Інструменти MCP, описи яких вимагають від ШІ більшого, ніж їх використання, прибираються зі списку (tool.description).",
+						"tr-TR": "Açıklaması yapay zekâdan onu kullanmaktan fazlasını isteyen MCP araçları listeden çıkarılır (tool.description).",
+						"fa-IR": "ابزارهای MCP که توضیحشان از هوش مصنوعی چیزی بیش از به‌کار بردنشان می‌خواهد از فهرست برداشته می‌شوند (tool.description)."
+					}
+				},
+				{
+					"key": "descriptionWaitMs",
+					"kind": "number",
+					"default": 8000,
+					"min": 500,
+					"max": 30000,
+					"unit": {
+						"zh": "毫秒",
+						"en": "ms",
+						"zh-TW": "毫秒",
+						"ja-JP": "ミリ秒",
+						"ko-KR": "밀리초",
+						"de-DE": "ms",
+						"fr-FR": "ms",
+						"es-ES": "ms",
+						"pt-BR": "ms",
+						"ru-RU": "мс",
+						"uk-UA": "мс",
+						"tr-TR": "ms",
+						"fa-IR": "میلی‌ثانیه"
+					},
+					"label": {
+						"zh": "工具说明最多等待",
+						"en": "Wait for tool descriptions at most",
+						"zh-TW": "工具說明最多等待",
+						"ja-JP": "ツール説明の最大待ち時間",
+						"ko-KR": "도구 설명 최대 대기",
+						"de-DE": "Höchstens auf Werkzeugbeschreibungen warten",
+						"fr-FR": "Attente maximale pour les descriptions d'outils",
+						"es-ES": "Espera máxima para las descripciones de herramientas",
+						"pt-BR": "Espera máxima pelas descrições de ferramentas",
+						"ru-RU": "Максимальное ожидание описаний инструментов",
+						"uk-UA": "Максимальне очікування описів інструментів",
+						"tr-TR": "Araç açıklamaları için en fazla bekleme",
+						"fa-IR": "بیشینهٔ انتظار برای توضیح ابزارها"
+					},
+					"help": {
+						"zh": "第一次见到的 MCP 工具，回合最多等这么久；超时先按规则处理，判定到了再更新。",
+						"en": "How long a turn waits for verdicts on MCP tools it has not seen before. After this the rules decide until the verdict lands.",
+						"zh-TW": "第一次見到的 MCP 工具，回合最多等這麼久；逾時先按規則處理，判定到了再更新。",
+						"ja-JP": "初めて見る MCP ツールの判定をターンが待つ最大時間です。過ぎるとルールで判断し、判定が届いたら更新します。",
+						"ko-KR": "처음 보는 MCP 도구에 대한 판정을 한 턴이 기다리는 최대 시간입니다. 넘으면 판정이 올 때까지 규칙으로 결정합니다.",
+						"de-DE": "Wie lange ein Zug auf Urteile zu MCP-Werkzeugen wartet, die er noch nicht kennt. Danach entscheiden die Regeln, bis das Urteil eintrifft.",
+						"fr-FR": "Combien de temps un tour attend les verdicts sur des outils MCP qu'il n'a jamais vus. Au-delà, les règles décident jusqu'à l'arrivée du verdict.",
+						"es-ES": "Cuánto espera un turno los veredictos sobre herramientas MCP que no ha visto antes. Pasado ese tiempo, deciden las reglas hasta que llegue el veredicto.",
+						"pt-BR": "Quanto tempo um turno espera os veredictos sobre ferramentas MCP que ainda não viu. Depois disso, as regras decidem até o veredicto chegar.",
+						"ru-RU": "Сколько ход ждёт вердиктов по инструментам MCP, которых он раньше не видел. Дальше до прихода вердикта решают правила.",
+						"uk-UA": "Скільки хід чекає вердиктів щодо інструментів MCP, яких він раніше не бачив. Далі до надходження вердикту вирішують правила.",
+						"tr-TR": "Bir turun daha önce görmediği MCP araçları için kararları ne kadar beklediği. Bundan sonra karar gelene kadar kurallar belirler.",
+						"fa-IR": "یک نوبت حداکثر چه مدت برای حکم دربارهٔ ابزارهای MCP که پیش‌تر ندیده منتظر می‌ماند. پس از آن تا رسیدن حکم، قاعده‌ها تصمیم می‌گیرند."
 					}
 				}
 			]

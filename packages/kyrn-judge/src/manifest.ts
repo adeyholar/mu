@@ -311,6 +311,16 @@ export const MANIFEST: HarnessManifest = {
 			},
 		},
 		{
+			id: "tool.description",
+			group: "tools",
+			feature: "injection",
+			title: { zh: "MCP 工具说明里的私货", en: "Orders hidden in MCP tool descriptions" },
+			summary: {
+				zh: "MCP 服务器自己写工具说明，模型把它当工具列表的一部分来读。每个工具第一次出现、说明变了时问一次：这段说明是不是要 AI 做调用这个工具以外的事（读用不着的文件或密钥、把数据发到别处、改变它对待别的工具或你的方式、瞒着你）？是的话这个工具从列表里拿掉，调用也被拒绝，并告诉你。Jev 没答上来时，只按 <IMPORTANT> 块、「别告诉用户」这类明显标记处理。",
+				en: 'An MCP server writes its own tool descriptions, and the model reads them as part of its tool list. Asked once per tool when it first appears and when its description changes: does the description ask the AI to do more than call this tool (read files or secrets it does not need, send data elsewhere, change how it treats other tools or you, keep something from you)? If so, the tool is taken off the list, calls to it are refused, and you are told. When Jev gives no answer, only plain markers such as an <IMPORTANT> block or "do not tell the user" count.',
+			},
+		},
+		{
 			id: "files.locate",
 			group: "tools",
 			feature: "locate",
@@ -799,8 +809,8 @@ export const MANIFEST: HarnessManifest = {
 			name: "injection",
 			title: { zh: "注入筛查", en: "Injection screening" },
 			summary: {
-				zh: "模型读网页、搜索结果、MCP 结果和 shell 命令从别的机器取回的内容之前，扣下写给 AI 的指令。",
-				en: "Withholds instructions aimed at an AI before the model reads web pages, search results, MCP answers and what shell commands fetch from other machines.",
+				zh: "模型读网页、搜索结果、MCP 结果和 shell 命令从别的机器取回的内容之前，扣下写给 AI 的指令；说明里夹带私货的 MCP 工具从列表里拿掉。",
+				en: "Withholds instructions aimed at an AI before the model reads web pages, search results, MCP answers and what shell commands fetch from other machines, and takes MCP tools whose descriptions carry such orders off the tool list.",
 			},
 			defaultEnabled: true,
 			options: [
@@ -846,6 +856,29 @@ export const MANIFEST: HarnessManifest = {
 					help: {
 						zh: "超时就只按规则扣下明显的注入用语，判定照样记账。",
 						en: "After this only plain injection phrases are withheld, by rule; the verdict is still recorded.",
+					},
+				},
+				{
+					key: "descriptions",
+					kind: "boolean",
+					default: true,
+					label: { zh: "筛 MCP 工具说明", en: "Screen MCP tool descriptions" },
+					help: {
+						zh: "说明里要 AI 做额外事情的 MCP 工具从列表里拿掉（tool.description）。",
+						en: "MCP tools whose descriptions ask the AI for more than using them are taken off the list (tool.description).",
+					},
+				},
+				{
+					key: "descriptionWaitMs",
+					kind: "number",
+					default: 8000,
+					min: 500,
+					max: 30000,
+					unit: ms,
+					label: { zh: "工具说明最多等待", en: "Wait for tool descriptions at most" },
+					help: {
+						zh: "第一次见到的 MCP 工具，回合最多等这么久；超时先按规则处理，判定到了再更新。",
+						en: "How long a turn waits for verdicts on MCP tools it has not seen before. After this the rules decide until the verdict lands.",
 					},
 				},
 			],
