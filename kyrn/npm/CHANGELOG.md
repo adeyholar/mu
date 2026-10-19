@@ -2,6 +2,23 @@
 
 ## [Unreleased]
 
+## [0.1.9] - 2026-10-19
+
+### Added
+
+- Two decision points, 40 in all:
+  - `tool.description` (feature `injection`, option `descriptions`, on by default): every MCP tool's description, with its parameters' descriptions, is asked about once per server when it first appears and again when it changes. Does it ask the AI for more than calling the tool? Over 0.5 the tool is removed from the active tools before any request carries it (before the turn, and before the results of a step in which a server connected), kept off at each step, and calls to it are blocked; the user is told once. Without a verdict only `<IMPORTANT>` blocks and "do not tell the user" count. Measured in `kyrn/docs/features/tool-descriptions.md`.
+  - `skill.capture` (feature `procedures`): after a run of `minSteps` (6) or more steps that ran `minCommands` (2) or more shell commands and did not end in an error, the judge says whether it was a reusable procedure. Over 0.7 the writer model (else the conversation's model) drafts a SKILL.md, kept in `<agent dir>/mu/skill-drafts` where pi does not load it. `/skills`, `/skills show|accept|reject <name>`; `accept --project` installs into the project. At most `maxPending` (3) drafts per project. Measured in `kyrn/docs/features/procedures.md`.
+- `tool.injection` screens bash and PowerShell results when the command runs a fetching program (`features.injection.fetchCommands`: curl, wget, gh, glab, lynx, w3m, Invoke-WebRequest, Invoke-RestMethod, iwr, irm), unless every address it names is local; `gh` and `glab` always count.
+- The report of a `delegate` or `hive` sub-agent whose tool results had passages withheld comes back under a warning; the parent counts the withheld notes in the child's event stream, with no extra judge call.
+- Built on pi 1.3.0 and upstream main after it (e28e70804, d2e7d8b7c).
+
+### Fixed
+
+- Claude Sonnet 5.5 keeps Anthropic's cache read price, and Kimi K3 on Moonshot its official rates, when models.dev lists others.
+- The goal's time cap and the web download cap show their units as units.
+- `@earendil-works/pi-telemetry` declares the `source` export condition, so tests that run without a build resolve it.
+
 ## [0.1.8] - 2026-10-06
 
 ### Added
