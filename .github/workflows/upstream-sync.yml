@@ -23,6 +23,8 @@ env:
   UPSTREAM: https://github.com/earendil-works/pi.git
   BRANCH: sync/pi-upstream
   GH_TOKEN: ${{ github.token }}
+  # With an `upstream` remote, gh would otherwise act on earendil-works/pi.
+  GH_REPO: ${{ github.repository }}
 
 jobs:
   sync:
@@ -31,6 +33,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          # The sync branch is main plus upstream, whichever ref started the run.
+          ref: ${{ github.event.repository.default_branch }}
           fetch-depth: 0
 
       - name: Setup Node.js
@@ -82,16 +86,34 @@ jobs:
           head="${{ steps.fetch.outputs.head }}"
           ahead="${{ steps.fetch.outputs.ahead }}"
           git push --force origin "$BRANCH"
+          # A push or a PR made with GITHUB_TOKEN starts no other workflow, so they are started here: CI, and the
+          # Environments and Windows runs, which upstream changes to Durable, env and the RPC layer reach first.
+          for workflow in ci.yml env.yml windows-tests.yml windows-permission.yml; do
+            gh workflow run "$workflow" --ref "$BRANCH"
+          done
           body="Merges earendil-works/pi main at \`$head\` ($ahead commits not yet in main).
 
-          Opened by the weekly upstream-sync workflow. CI is started on this branch by the workflow. Read the upstream changes for anything that touches mu's integrations before merging."
+          Opened by the weekly upstream-sync workflow. CI is started on this branch by the workflow. Read the upstream changes for anything that touches mu's integrations before merging. Merge with a merge commit, not a squash: the upstream history has to stay an ancestor of main."
           if gh pr view "$BRANCH" --json state --jq .state 2>/dev/null | grep -q OPEN; then
             gh pr edit "$BRANCH" --title "merge: pi upstream $head" --body "$body"
-          else
-            gh pr create --base main --head "$BRANCH" --title "merge: pi upstream $head" --body "$body"
+            exit 0
           fi
-          # A PR opened with GITHUB_TOKEN does not start other workflows, so start CI here.
-          gh workflow run ci.yml --ref "$BRANCH"
+          if gh pr create --base main --head "$BRANCH" --title "merge: pi upstream $head" --body "$body"; then
+            exit 0
+          fi
+          # A repository whose settings do not let Actions open pull requests refuses this. The branch is pushed
+          # either way, so say where it is: one click opens the PR.
+          compare="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/compare/main...$BRANCH?expand=1"
+          title="pi upstream ready to merge: $head"
+          note="$body
+
+          The workflow could not open the pull request itself. Open it here: $compare"
+          existing=$(gh issue list --state open --search "in:title pi upstream ready to merge" --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue edit "$existing" --title "$title" --body "$note"
+          else
+            gh issue create --title "$title" --body "$note"
+          fi
 
       - name: Report conflicts
         if: steps.merge.outputs.result == 'conflict'
