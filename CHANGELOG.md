@@ -6,6 +6,8 @@ mu is in pre-release (0.1.x): names, settings and formats may still change betwe
 
 ## [Unreleased]
 
+## [0.1.8] - 2026-10-19
+
 ### Added
 
 - **Prompt injection is screened in more places.**
