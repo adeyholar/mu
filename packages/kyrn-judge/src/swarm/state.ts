@@ -1,3 +1,4 @@
+import { WITHHELD_NOTES } from "../decisions/tool-injection.ts";
 import { type Coded, codedError, codeOf } from "../language.ts";
 import {
 	CHECKPOINT,
@@ -81,6 +82,11 @@ export interface BeeState {
 	/** Hive only: notes of its own that passed the judge, and notes of others the judge handed it. */
 	published: number;
 	received: number;
+	/**
+	 * Passages its own injection screen withheld from what it read: text aimed at an AI was in its tool results. Its
+	 * report is then handed back with a warning, since what the screen missed may be repeated in it.
+	 */
+	withheld: number;
 	/** Why it is over, when it did not simply finish. */
 	error?: string;
 	/** The same as a code: see `BEE_ERROR_CODES` in run.ts. */
@@ -122,6 +128,7 @@ export function newBee(name: string, now: number, details: Partial<BeeState> = {
 		usage: { input: 0, output: 0, cacheRead: 0, cost: 0 },
 		published: 0,
 		received: 0,
+		withheld: 0,
 		recent: [],
 		finals: [],
 		...details,
@@ -275,6 +282,10 @@ export function applyEvent(state: BeeState, event: BeeEvent, now: number): boole
 			break;
 		case "message_end": {
 			const message = event.message;
+			if (message?.role === "toolResult") {
+				state.withheld += textOf(message.content).match(WITHHELD_NOTES)?.length ?? 0;
+				break;
+			}
 			if (message?.role !== "assistant") break;
 			const usage = message.usage;
 			if (usage) {

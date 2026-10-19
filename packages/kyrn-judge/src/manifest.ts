@@ -306,8 +306,8 @@ export const MANIFEST: HarnessManifest = {
 			feature: "injection",
 			title: { zh: "外来内容里的指令", en: "Instructions in outside content" },
 			summary: {
-				zh: "网页、搜索结果和 MCP 服务器返回的内容，模型读到之前先过一遍：哪一段是写给 AI 的指令（让它忽略规则、交出数据、跑命令，或借一个链接把对话带出去）。这样的段落被扣下，换成一行说明。Jev 没答上来时，只扣下明显的注入用语。",
-				en: "Before the model reads a web page, search results or an MCP server's answer: which passages carry instructions aimed at an AI (ignore rules, hand over data, run commands, or carry the conversation out through a link)? Those are withheld and replaced by a one-line note. When Jev gives no answer, only plain injection phrases are withheld.",
+				zh: "网页、搜索结果、MCP 服务器返回的内容，以及 shell 命令从别的机器取回的内容（curl、gh issue view），模型读到之前先过一遍：哪一段是写给 AI 的指令（让它忽略规则、交出数据、跑命令，或借一个链接把对话带出去）。这样的段落被扣下，换成一行说明。Jev 没答上来时，只扣下明显的注入用语。子代理读到的内容里有段落被扣下时，它的报告交回时前面带一句警告。",
+				en: "Before the model reads a web page, search results, an MCP server's answer or what a shell command fetched from another machine (curl, gh issue view): which passages carry instructions aimed at an AI (ignore rules, hand over data, run commands, or carry the conversation out through a link)? Those are withheld and replaced by a one-line note. When Jev gives no answer, only plain injection phrases are withheld. A sub-agent that had passages withheld from what it read hands back its report under a warning.",
 			},
 		},
 		{
@@ -799,8 +799,8 @@ export const MANIFEST: HarnessManifest = {
 			name: "injection",
 			title: { zh: "注入筛查", en: "Injection screening" },
 			summary: {
-				zh: "模型读网页、搜索结果和 MCP 结果之前，扣下写给 AI 的指令。",
-				en: "Withholds instructions aimed at an AI before the model reads web pages, search results and MCP answers.",
+				zh: "模型读网页、搜索结果、MCP 结果和 shell 命令从别的机器取回的内容之前，扣下写给 AI 的指令。",
+				en: "Withholds instructions aimed at an AI before the model reads web pages, search results, MCP answers and what shell commands fetch from other machines.",
 			},
 			defaultEnabled: true,
 			options: [
@@ -812,6 +812,27 @@ export const MANIFEST: HarnessManifest = {
 					help: {
 						zh: "工具名，或以 * 结尾的前缀；mcp__* 是所有 MCP 服务器。",
 						en: "Tool names, or a prefix ending in *; mcp__* is every MCP server.",
+					},
+				},
+				{
+					key: "fetchCommands",
+					kind: "list",
+					default: [
+						"curl",
+						"wget",
+						"gh",
+						"glab",
+						"lynx",
+						"w3m",
+						"Invoke-WebRequest",
+						"Invoke-RestMethod",
+						"iwr",
+						"irm",
+					],
+					label: { zh: "算作外取的命令", en: "Fetching commands" },
+					help: {
+						zh: "bash 或 PowerShell 命令用到这些程序时，输出要筛；给的地址全在本机（localhost）时不筛，gh 和 glab 总要筛。留空：不筛 shell 输出。",
+						en: "When a bash or PowerShell command runs one of these programs, its output is screened, unless every address it is given is on this machine (localhost); gh and glab always are. Empty: no shell output is screened.",
 					},
 				},
 				{

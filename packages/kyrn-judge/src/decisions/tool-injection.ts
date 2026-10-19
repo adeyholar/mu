@@ -28,6 +28,15 @@ export type InjectionOutcome = number | null;
 
 export const INJECTION_THRESHOLD = 0.5;
 
+/** How the note that stands in a withheld passage's place begins. */
+export const WITHHELD_NOTE = "[mu withheld ";
+
+/**
+ * The note as it stands in a result. The parent of a sub-agent counts it in the child's event stream, and so knows
+ * the child read text aimed at an AI; the number after the prefix tells it apart from a source file that quotes it.
+ */
+export const WITHHELD_NOTES = /\[mu withheld \d+ characters here:/g;
+
 function injectionQuestion(field: string): Question {
 	return {
 		type: "boolean",
