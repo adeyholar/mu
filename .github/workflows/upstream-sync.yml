@@ -86,8 +86,11 @@ jobs:
           head="${{ steps.fetch.outputs.head }}"
           ahead="${{ steps.fetch.outputs.ahead }}"
           git push --force origin "$BRANCH"
-          # A push or a PR made with GITHUB_TOKEN starts no other workflow, so CI is started here.
-          gh workflow run ci.yml --ref "$BRANCH"
+          # A push or a PR made with GITHUB_TOKEN starts no other workflow, so they are started here: CI, and the
+          # Environments and Windows runs, which upstream changes to Durable, env and the RPC layer reach first.
+          for workflow in ci.yml env.yml windows-tests.yml windows-permission.yml; do
+            gh workflow run "$workflow" --ref "$BRANCH"
+          done
           body="Merges earendil-works/pi main at \`$head\` ($ahead commits not yet in main).
 
           Opened by the weekly upstream-sync workflow. CI is started on this branch by the workflow. Read the upstream changes for anything that touches mu's integrations before merging. Merge with a merge commit, not a squash: the upstream history has to stay an ancestor of main."
